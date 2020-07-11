@@ -2,6 +2,8 @@
 #define BULLET_H
 #include <QGraphicsRectItem>
 #include <QObject>
+#include <QEvent>
+#include <QDebug>
 
 class Bullet: public QObject, public QGraphicsRectItem
 {

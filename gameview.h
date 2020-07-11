@@ -4,13 +4,8 @@
 #include <QMouseEvent>
 #include <QGraphicsItem>
 #include <qmath.h>
+#include <QDebug>
 #include "standarttank.h"
-
-namespace tank {
-    enum size {
-      width = 100, height = 100
-    };
-}
 
 class GameView: public QGraphicsView
 {
@@ -22,11 +17,18 @@ public:
     GameView(QGraphicsScene * scene)
         : QGraphicsView(scene) {
         setMouseTracking(true);
-        tank = new StandartTank(scene->width() / 2 - tank::width / 2, scene->height() / 2 - tank::height / 2);
+        installEventFilter(this);
+
+        tank = new StandartTank(scene->width() / 2 - StandartTank::width / 2, scene->height() / 2 - StandartTank::height / 2);
         tank->setFlag(QGraphicsItem::ItemIsFocusable);
         tank->setFocus();
 
+        StandartTank * enemyTank = new StandartTank(100, 100, StandartTank::enemy);
+        this->scene()->addItem(enemyTank);
+
         this->scene()->addItem(tank);
+
+
     }
 
     virtual void mousePressEvent(QMouseEvent *event) override {
@@ -53,6 +55,8 @@ public:
         double angle = atan2(mousePosition.y() - projectileStartPosition.y(),
                              mousePosition.x() - projectileStartPosition.x());
 
+        tank->setTrackMousePoint(QPoint(event->x(), event->y()));
+
         tower->setRotation(qRadiansToDegrees(angle) + 90 - tank->rotation());
         // + 90 becouse this func means:
         //      90
@@ -60,6 +64,7 @@ public:
         //      270
         // At the same time in our coordinate system 90 is replaced with 0 and all left numbers go all the way down.
     }
+
 };
 
 #endif // GAMEVIEW_H

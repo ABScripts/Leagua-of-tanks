@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QGraphicsScene * scene = new QGraphicsScene();
+    QGraphicsScene * scene = new QGraphicsScene(&a);
     scene->setSceneRect(QRectF(0, 0, window::width, window::height));
 
     GameView * view = new GameView(scene);
