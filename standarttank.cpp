@@ -132,7 +132,7 @@ StandartTank::~StandartTank()
     // Nevertheless tower var is created using "new", thanks to the parent-child reletions it`s deleted auto-lly
 }
 
-TankTower *StandartTank::getTower() const
+inline TankTower *StandartTank::getTower() const
 {
     return tower;
 }

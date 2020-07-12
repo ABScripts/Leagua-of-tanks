@@ -32,20 +32,41 @@ public:
     }
 
     virtual void mousePressEvent(QMouseEvent *event) override {
-        // getting the tank`s tower
-        QGraphicsRectItem * tower = tank->getTower();
-        //actually the top left corner where the bullet will appear
+    //This part should be fixed!!!
 
-        QPointF bulletAppearPoint = {tank->x() + tank->rect().width() / 2 - Bullet::width / 2,
-                                     tank->y() + tank->rect().height() / 2 - Bullet::height /2};
+//        // getting the tank`s tower
+//        TankTower * tower = tank->getTower();
+//        //actually the top left corner where the bullet will appear
 
-        Bullet * bull = new Bullet(bulletAppearPoint.x(), bulletAppearPoint.y(), tower->rotation() + tank->rotation());
-        bull->setTransformOriginPoint(bull->rect().width() / 2, bull->rect().height() / 2);
-        this->scene()->addItem(bull);
+
+//        int angle = tower->rotation();
+
+//        qDebug() << tower->rotation();
+
+//        double si = qSin(angle);
+//        double co = qCos(angle);
+
+//        QPoint currentMiddle = tower->middle;
+//        QPoint center = QPoint(tank->x() + tank->rect().width() / 2, tank->y() + tank->rect().height() / 2);
+
+
+//        X = x0 + (x - x0) * cos(a) - (y - y0) * sin(a);
+
+//       Y = y0 + (y - y0) * cos(a) + (x - x0) * sin(a);
+
+//        QGraphicsRectItem * dot = new QGraphicsRectItem(0,0,5,5);
+//        dot->setPos(tower->middle.x(), tower->middle.y());
+
+//        this->scene()->addItem(dot);
+
+//        Bullet * bull = new Bullet(0, 0, tower->rotation() + tank->rotation());
+// bull->setPos(f.x(), f.y());
+//        bull->setTransformOriginPoint(bull->rect().width() / 2, bull->rect().height() / 2);
+//        this->scene()->addItem(bull);
     }
 
     virtual void mouseMoveEvent(QMouseEvent *event) override {
-    QGraphicsRectItem * tower = tank->getTower();
+    TankTower * tower = tank->getTower();
 
         // point where the projectile explode
         QPointF projectileStartPosition = {tank->x() + tank->rect().width() / 2, tank->y() + tank->rect().height()};
@@ -58,6 +79,25 @@ public:
         tank->setTrackMousePoint(QPoint(event->x(), event->y()));
 
         tower->setRotation(qRadiansToDegrees(angle) + 90 - tank->rotation());
+
+
+        angle = tower->rotation();
+
+        qDebug() << tower->rotation();
+
+        double si = qSin(qDegreesToRadians(angle));
+        double co = qCos(qDegreesToRadians(angle));
+        QPoint currentMiddle = tower->middle;
+        QPoint center = QPoint(tank->x() + tank->rect().width() / 2, tank->y() + tank->rect().height() / 2);
+
+        tower->middle = QPoint(center.x() + (currentMiddle.x() - center.x()) * co - (currentMiddle.y() - center.y()) * si,
+                               center.y() + (currentMiddle.y() - center.y()) * co + (currentMiddle.x() - center.x()) * si);
+
+
+        QGraphicsRectItem * dot = new QGraphicsRectItem(0,0,5,5);
+        dot->setPos(tower->middle.x(), tower->middle.y());
+
+        this->scene()->addItem(dot);
         // + 90 becouse this func means:
         //      90
         //   180 + 0
@@ -66,5 +106,7 @@ public:
     }
 
 };
+
+
 
 #endif // GAMEVIEW_H

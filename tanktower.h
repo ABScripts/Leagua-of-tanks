@@ -8,6 +8,8 @@ class TankTower: public QGraphicsRectItem
 public:
     TankTower();
     TankTower(qreal x, qreal y, qreal width, qreal height, QGraphicsItem * parent);
+
+    QPoint middle;
 protected:
     double rotationSpeed;
 };

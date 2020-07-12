@@ -37,8 +37,8 @@ void Bullet::move()
         }
 
     double angle = rotation();
-    double dx = 6 * qSin(qDegreesToRadians(angle));
-    double dy = 6 * qCos(qDegreesToRadians(angle));
+    double dx = 2 * qSin(qDegreesToRadians(angle));
+    double dy = 2 * qCos(qDegreesToRadians(angle));
 
     this->setPos(x() + dx, y() - dy);
 
