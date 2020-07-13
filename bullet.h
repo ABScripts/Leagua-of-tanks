@@ -15,12 +15,14 @@ public:
     };
 
     Bullet(qreal x, qreal y, double angle);
+    ~Bullet();
 
 public slots:
     void move();
 
 private:
     double angle;
+    QTimer * timer;
 };
 
 #endif // BULLET_H

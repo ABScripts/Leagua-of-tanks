@@ -13,9 +13,6 @@ StandartTank::StandartTank(qreal x, qreal y, type tankType)
     // rev this
     this->setPos(x, y);
 
-//     tower = new TankTower(this->rect().width()/2 - (this->rect().width()-50) /2, this->rect().height() - (this->rect().height() + 40),
-//                           this->rect().width()-50, this->rect().height() + 40, this);
-
     tower = new TankTower(0, 0, this->rect().width()-50, this->rect().height() + 40, this);
 
      tower->setPos(this->rect().width()/2 - tower->rect().width() / 2, -40);
@@ -132,7 +129,7 @@ StandartTank::~StandartTank()
     // Nevertheless tower var is created using "new", thanks to the parent-child reletions it`s deleted auto-lly
 }
 
-inline TankTower *StandartTank::getTower() const
+TankTower *StandartTank::getTower() const
 {
     return tower;
 }

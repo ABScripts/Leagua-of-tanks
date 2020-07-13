@@ -9,15 +9,20 @@
 Bullet::Bullet(qreal x, qreal y, double angle) // qreal is just a typedef of double
     : QGraphicsRectItem(0, 0, size::width, size::height)
 {
-    QTimer * timer = new QTimer();
+    timer = new QTimer();
 
     this->setRotation(angle);
 
     this->setPos(x, y);
 
-    connect(timer, &QTimer::timeout, this, &Bullet::move);
-
     timer->start(5);
+
+    connect(timer, &QTimer::timeout, this, &Bullet::move);
+}
+
+Bullet::~Bullet()
+{
+    delete timer;
 }
 
 void Bullet::move()
@@ -37,8 +42,8 @@ void Bullet::move()
         }
 
     double angle = rotation();
-    double dx = 2 * qSin(qDegreesToRadians(angle));
-    double dy = 2 * qCos(qDegreesToRadians(angle));
+    double dx = 4 * qSin(qDegreesToRadians(angle));
+    double dy = 4 * qCos(qDegreesToRadians(angle));
 
     this->setPos(x() + dx, y() - dy);
 

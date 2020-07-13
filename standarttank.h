@@ -9,7 +9,7 @@
 #include "tanktower.h"
 
 namespace {
-    constexpr double standartTankMoveSpeed = 5;
+    constexpr double standartTankMoveSpeed = 3;
     constexpr double standartTankrotationSpeed = 1;
 }
 
