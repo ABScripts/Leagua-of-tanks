@@ -9,20 +9,24 @@ class Bullet: public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 public:
-    enum size {
-        width = 10,
-        height = 40
+    enum Size {
+        Width = 10,
+        Height = 40
     };
 
-    Bullet(qreal x, qreal y, double angle);
+    enum Speed {
+        MoveSpeed = 4
+    };
+
+    Bullet(qreal x, qreal y, double mAngle);
     ~Bullet();
 
 public slots:
     void move();
 
 private:
-    double angle;
-    QTimer * timer;
+    double mAngle;
+    QTimer * mMotionTimer_ptr;
 };
 
 #endif // BULLET_H

@@ -8,67 +8,57 @@
 #include "bullet.h"
 #include "tanktower.h"
 
-namespace {
-    constexpr double standartTankMoveSpeed = 3;
-    constexpr double standartTankrotationSpeed = 1;
-}
-
 class StandartTank: public QObject, public QGraphicsRectItem {
     Q_OBJECT
 public:
-    enum type {
-        enemy = 0,
-        teammate,
-        self
+    enum Speed {
+        MoveSpeed = 3,
+        RotationSpeed = 1
     };
 
-    enum size {
-        width = 100,
-        height = 100
+    enum Size {
+        Width = 100,
+        Height = 100
     };
 
-    enum moveDir {
-        left = 0,
-        right,
-        up,
-        down,
-        none
+    enum class TankType {
+        Enemy = 0,
+        Teammate,
+        Self
     };
 
-    type typei;
+    enum class MoveDir {
+        Left = 0,
+        Right,
+        Up,
+        Down
+    };
 
     StandartTank() = default;
-
-    StandartTank(qreal x, qreal y, type tankType = self);
-
+    StandartTank(qreal x, qreal y, TankType type = TankType::Self);
     virtual ~StandartTank();
 
     TankTower *getTower() const;
-
     void setTrackMousePoint(const QPointF &value);
+    TankType getTankType() const;
 
 public slots:
     virtual void move();
 
 protected:
-    // when creating this in spec. classes pass "this" as a parameter so it`ll be freed by system auto-lly.
-    TankTower * tower; // each vehicle in game has a tower
-    QTimer motionTimer; // timer which helps to move the vehicle smoothly
-    double moveSpeed;
-    // determines how fast the body of vehicle could be rotated
-    double rotationSpeed;
-    // vector pf rotation which enables multi key pressings
-    std::vector<moveDir> dirv;
-
-    QPointF trackMousePoint;
-
+    TankTower * mTower_ptr; // each vehicle in game has a tower
+    QTimer mMotionTimer; // timer which helps to move the vehicle smoothly
+    double mMoveSpeed;
+    double mRotationSpeed;  // determines how fast the body of vehicle could be rotated
+    std::vector<MoveDir> mMoveDirectionBuffer; // vector pf rotation which enables multi key pressings
+    TankType mTankType; // tank`s type to distinguish enemies and allies
+    QPointF mTrackMousePoint;  // the last position of mouse cursor
 
 private:
-    virtual void keyPressEvent(QKeyEvent * event) override;
-    virtual void keyReleaseEvent(QKeyEvent * event) override;
-
-    void applyRotation(moveDir dir);
-    void applyKeyPress(moveDir dir, double dx, double dy);
+    void keyPressEvent(QKeyEvent * event) override;
+    void keyReleaseEvent(QKeyEvent * event) override;
+    void applyRotation(MoveDir dir);
+    void applyKeyPress(MoveDir dir, double dx, double dy);
 };
 
 #endif // TANK_H

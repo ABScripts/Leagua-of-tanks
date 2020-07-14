@@ -5,7 +5,7 @@
 #include "standarttank.h"
 #include "gameview.h"
 
-namespace window{
+namespace window{ // should be fixed
     const int width = 1600;
     const int height = 800;
 }

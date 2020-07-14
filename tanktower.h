@@ -9,12 +9,8 @@ public:
     TankTower();
     TankTower(qreal x, qreal y, qreal width, qreal height, QGraphicsItem * parent);
 
-    QPoint middle;
-
-    Bullet *bull;
-
 protected:
-    double rotationSpeed;
+    double mRotationSpeed;
 };
 
 #endif // TANKTOWER_H
