@@ -7,7 +7,7 @@
 
 class MathCore {
 public:
-    static inline QPoint pointOnCircle(const StandartTank * const tank, double circleRadius, double angle);
+    static QPoint pointOnCircle(const StandartTank * const tank, qreal circleRadius, qreal angle);
 };
 
 #endif

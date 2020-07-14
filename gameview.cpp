@@ -1,3 +1,5 @@
+#include <QMouseEvent>
+
 #include "gameview.h"
 #include "MathCore/mathcore.h"
 
@@ -25,9 +27,10 @@ void GameView::mousePressEvent(QMouseEvent *event)
     // getting the tank`s tower
     TankTower * tower = tank->getTower();
 
-    // determines the top left point in which the bullet shiuld spawn
-    QPoint spawnPoint = MathCore::pointOnCircle(tank, fabs(tank->rect().center().y() - tower->y()) + Bullet::Height,
-                                                                           tower->rotation()-90 + tank->rotation());
+    // determines the top left point in which the bullet should spawn
+    QPoint spawnPoint = MathCore::pointOnCircle(tank,
+                                                fabs(tank->rect().center().y() - tower->y()) + static_cast<int>(Bullet::Size::Height),
+                                                tower->rotation()-90 + tank->rotation());
 
     Bullet * bull = new Bullet(0, 0, tower->rotation() + tank->rotation());
     bull->setPos(spawnPoint.x(), spawnPoint.y());
@@ -43,8 +46,8 @@ void GameView::mouseMoveEvent(QMouseEvent *event)
     // actually the point where the mouse currently is
     QPointF mousePosition = event->pos();
 
-    double angle = atan2(mousePosition.y() - bulletStartPosition.y() + Bullet::Size::Width / 2,
-                         mousePosition.x() - bulletStartPosition.x() + Bullet::Size::Width / 2);
+    qreal angle = atan2(mousePosition.y() - bulletStartPosition.y() + static_cast<int>(Bullet::Size::Width) / 2,
+                         mousePosition.x() - bulletStartPosition.x() + static_cast<int>(Bullet::Size::Width) / 2);
 
     // remembers the last position of mouse when it was moved (products a slight movements)
     tank->setTrackMousePoint(QPoint(event->x(), event->y()));

@@ -1,31 +1,29 @@
 #ifndef BULLET_H
 #define BULLET_H
+
 #include <QGraphicsRectItem>
 #include <QObject>
-#include <QEvent>
-#include <QDebug>
 
 class Bullet: public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 public:
-    enum Size {
+    enum class Size {
         Width = 10,
         Height = 40
     };
 
-    enum Speed {
+    enum class Speed {
         MoveSpeed = 4
     };
 
-    Bullet(qreal x, qreal y, double mAngle);
-    ~Bullet();
+    Bullet(qreal x, qreal y, qreal mAnglel);
 
 public slots:
     void move();
 
 private:
-    double mAngle;
+    qreal mAngle;
     QTimer * mMotionTimer_ptr;
 };
 

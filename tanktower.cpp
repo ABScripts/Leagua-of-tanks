@@ -1,5 +1,4 @@
 #include "tanktower.h"
-#include <QAbstractGraphicsShapeItem>
 
 TankTower::TankTower()
 {

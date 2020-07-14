@@ -94,7 +94,7 @@ void StandartTank::keyReleaseEvent(QKeyEvent * event)
     }
 }
 
-void StandartTank::applyKeyPress(MoveDir dir, double dx, double dy)
+void StandartTank::applyKeyPress(MoveDir dir, qreal dx, qreal dy)
 {
     if (dir == MoveDir::Down) {
         this->setPos(x() - dx, y() + dy);
@@ -111,10 +111,10 @@ void StandartTank::applyKeyPress(MoveDir dir, double dx, double dy)
 
 void StandartTank::move()
 {
-    double angle = rotation();
+    qreal angle = rotation();
 
-    double dx = mMoveSpeed * qSin(qDegreesToRadians(angle));
-    double dy = mMoveSpeed * qCos(qDegreesToRadians(angle));
+    qreal dx = mMoveSpeed * qSin(qDegreesToRadians(angle));
+    qreal dy = mMoveSpeed * qCos(qDegreesToRadians(angle));
 
     // going through all of the keys and applying actions according to the dir-s
     std::for_each(mMoveDirectionBuffer.begin(), mMoveDirectionBuffer.end(), [&](MoveDir & dir){

@@ -1,10 +1,10 @@
 #ifndef TANK_H
 #define TANK_H
+
 #include <QTimer>
 #include <QObject>
 #include <QMouseEvent>
 #include <QGraphicsRectItem>
-#include <iostream>
 #include "bullet.h"
 #include "tanktower.h"
 
@@ -48,8 +48,8 @@ public slots:
 protected:
     TankTower * mTower_ptr; // each vehicle in game has a tower
     QTimer mMotionTimer; // timer which helps to move the vehicle smoothly
-    double mMoveSpeed;
-    double mRotationSpeed;  // determines how fast the body of vehicle could be rotated
+    qreal mMoveSpeed;
+    qreal mRotationSpeed;  // determines how fast the body of vehicle could be rotated
     std::vector<MoveDir> mMoveDirectionBuffer; // vector pf rotation which enables multi key pressings
     TankType mTankType; // tank`s type to distinguish enemies and allies
     QPointF mTrackMousePoint;  // the last position of mouse cursor
@@ -58,7 +58,7 @@ private:
     void keyPressEvent(QKeyEvent * event) override;
     void keyReleaseEvent(QKeyEvent * event) override;
     void applyRotation(MoveDir dir);
-    void applyKeyPress(MoveDir dir, double dx, double dy);
+    void applyKeyPress(MoveDir dir, qreal dx, qreal dy);
 };
 
 #endif // TANK_H

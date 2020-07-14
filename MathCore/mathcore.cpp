@@ -1,8 +1,8 @@
-#include "mathcore.h"
+#include "MathCore/mathcore.h"
 
-inline QPoint MathCore::pointOnCircle(const StandartTank * const tank, double circleRadius, double angle)
+QPoint MathCore::pointOnCircle(const StandartTank * const tank, qreal circleRadius, qreal angle)
 {
-    double radAngle = qDegreesToRadians(angle);
+    qreal radAngle = qDegreesToRadians(angle);
 
     // parametric equation
     return QPoint( circleRadius * qCos(radAngle) + tank->x() + tank->rect().width() / 2  ,

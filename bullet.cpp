@@ -1,25 +1,21 @@
 #include <QList>
 #include <QTimer>
-#include <QDebug>
+#include <qmath.h>
 #include <QGraphicsScene>
+
 #include "bullet.h"
 #include "standarttank.h"
-#include <qmath.h>
 
-Bullet::Bullet(qreal x, qreal y, double angle) // qreal is just a typedef of double
-    : QGraphicsRectItem(0, 0, Bullet::Size::Width, Bullet::Size::Height)
+Bullet::Bullet(qreal x, qreal y, qreal angle) // qreal is just a typedef of qreal
+    : QGraphicsRectItem(0, 0, static_cast<int>(Bullet::Size::Width),
+                              static_cast<int>(Bullet::Size::Height))
 {
-    this->setRotation(angle);
-    this->setPos(x, y);
+    setRotation(angle);
+    setPos(x, y);
 
-    mMotionTimer_ptr = new QTimer();
+    mMotionTimer_ptr = new QTimer(this);
     mMotionTimer_ptr->start(5);
     connect(mMotionTimer_ptr, &QTimer::timeout, this, &Bullet::move);
-}
-
-Bullet::~Bullet()
-{
-    delete mMotionTimer_ptr;
 }
 
 void Bullet::move()
@@ -27,7 +23,7 @@ void Bullet::move()
     QList<QGraphicsItem *> collideItems = this->collidingItems();
 
     // checking for collidings
-    for (int i = 0; i < collideItems.length(); ++i) {
+    for (int i = 0; i < collideItems.size(); ++i) {
         if (typeid (*collideItems[i]) == typeid(StandartTank)) {
             if ( dynamic_cast<StandartTank*>(collideItems[i])->getTankType() == StandartTank::TankType::Enemy) {
                 scene()->removeItem(collideItems[i]);
@@ -38,9 +34,9 @@ void Bullet::move()
         }
     }
 
-    double angle = rotation();
-    double dx = Bullet::Speed::MoveSpeed * qSin(qDegreesToRadians(angle));
-    double dy = Bullet::Speed::MoveSpeed * qCos(qDegreesToRadians(angle));
+    qreal angle = rotation();
+    qreal dx = static_cast<int>(Bullet::Speed::MoveSpeed) * qSin(qDegreesToRadians(angle));
+    qreal dy = static_cast<int>(Bullet::Speed::MoveSpeed) * qCos(qDegreesToRadians(angle));
 
     this->setPos(x() + dx, y() - dy);
 

@@ -1,5 +1,6 @@
 #ifndef TANKTOWER_H
 #define TANKTOWER_H
+
 #include <QGraphicsRectItem>
 #include "bullet.h"
 
@@ -10,7 +11,7 @@ public:
     TankTower(qreal x, qreal y, qreal width, qreal height, QGraphicsItem * parent);
 
 protected:
-    double mRotationSpeed;
+    qreal mRotationSpeed;
 };
 
 #endif // TANKTOWER_H
