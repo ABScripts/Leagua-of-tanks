@@ -2,20 +2,24 @@
 #define GAMEVIEW_H
 
 #include <QGraphicsView>
-#include <qmath.h>
 
-#include "standarttank.h"
+class GameSceneViewModel;
 
+// actually the view
 class GameView: public QGraphicsView
 {
-private:
-    StandartTank * tank;
+    Q_OBJECT
 public:
-    GameView();
-    GameView(QGraphicsScene * scene);
+    GameView() = default;
+    GameView(GameSceneViewModel * scene, QWidget * parent);
 
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
+private:
+    GameSceneViewModel * mviewModel_ptr;
+signals:
+    void mousePressEventOccured(QMouseEvent * event);
+    void mouseMoveEventOccured(QMouseEvent * event);
 };
 
 

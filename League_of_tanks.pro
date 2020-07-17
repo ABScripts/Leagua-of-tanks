@@ -17,22 +17,39 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     MathCore/mathcore.cpp \
+    Tanks/TankModels/tankmodel.cpp \
+    Tanks/TankTowers/tanktower.cpp \
+    Tanks/TankViewModels/tankviewmodel.cpp \
+    Tanks/TankViews/tankview.cpp \
+    Tanks/enemytank.cpp \
+    Tanks/tank.cpp \
+    Tanks/teammatetank.cpp \
     bullet.cpp \
     gameview.cpp \
+    graphicscenemodel.cpp \
     main.cpp \
-    standarttank.cpp \
-    tanktower.cpp
+    maingamewindow.cpp
 
 HEADERS += \
     MathCore/mathcore.h \
+    Tanks/TankModels/tankmodel.h \
+    Tanks/TankTowers/tanktower.h \
+    Tanks/TankViewModels/tankviewmodel.h \
+    Tanks/TankViews/tankview.h \
+    Tanks/enemytank.h \
+    Tanks/tank.h \
+    Tanks/teammatetank.h \
     bullet.h \
     gameview.h \
-    standarttank.h \
-    tanktower.h
-
-FORMS +=
+    graphicscenemodel.h \
+    maingamewindow.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES +=
+
+RESOURCES += \
+    resources.qrc
