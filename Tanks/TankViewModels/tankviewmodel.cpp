@@ -1,11 +1,16 @@
 #include "tankviewmodel.h"
 
 #include <QKeyEvent>
+#include <QFileInfo>
 #include "../TankModels/tankmodel.h"
 
 TankViewModel::TankViewModel()
 {
     mTankModel_ptr = new TankModel();
+
+    connect(this, SIGNAL(newDirectionWasSetted(MoveDir)), mTankModel_ptr, SLOT(setNewDirectionSlot(MoveDir)));
+    connect(this, SIGNAL(DirectionWasUnsetted(MoveDir)), mTankModel_ptr, SLOT(unsetDirectionSlot(MoveDir)));
+    connect(mTankModel_ptr, SIGNAL(directionsChanged(int, int)), this, SLOT(directionChangedSlot(int, int)));
 }
 
 TankViewModel::~TankViewModel()
@@ -18,7 +23,7 @@ void TankViewModel::keyPressEventOccuredSlot(QKeyEvent * event)
     MoveDir direction;
     distinguishDirection(event->key(), direction);
 
-    if (direction == MoveDir::None) {
+    if (direction != MoveDir::None) {
         emit newDirectionWasSetted(direction);
     }
 
@@ -37,6 +42,25 @@ void TankViewModel::keyReleaseEventOccuredSlot(QKeyEvent * event)
         emit DirectionWasUnsetted(direction);
     }
 
+}
+
+void TankViewModel::requestForImagePathSlot()
+{
+    QString imageFilePath = mTankModel_ptr->bodyImagePath();
+    QFileInfo check(imageFilePath);
+    // if file does not exist or it is not  file, or it is not a png image
+    if (!(check.exists() && check.isFile() && check.completeSuffix() == "png")) {
+        imageFilePath = "";
+    }
+
+    emit imagePathFetched(imageFilePath); // send this path to the view to set the image there...
+}
+
+void TankViewModel::directionChangedSlot(int moveSpeed, int rotationSpeed)
+{
+    QVector<MoveDir> directions = mTankModel_ptr->getDirections();
+
+    emit directionChanged(moveSpeed, rotationSpeed, directions);
 }
 
 void TankViewModel::distinguishDirection(int key, MoveDir & resDir)

@@ -34,31 +34,26 @@ public:
 //        Down
 //    };
 
-    Tank() = default;
-    Tank(qreal x, qreal y, QGraphicsItem * parent = nullptr);
-    virtual ~Tank();
+//    Tank() = default;
+//    Tank(qreal x, qreal y, QGraphicsItem * parent = nullptr);
+//    virtual ~Tank();
 
-    TankTower *getTower() const;
-    void setTrackMousePoint(const QPointF &value);
+//    TankTower *getTower() const;
+//    void setTrackMousePoint(const QPointF &value);
 
     //QRectF boundingRect() const override;
 
-public slots:
-    virtual void move();
 
-protected:
-    TankTower * mTower_ptr; // each vehicle in game has a tower
-    QTimer mMotionTimer; // timer which helps to move the vehicle smoothly
 //    qreal mMoveSpeed;
 //    qreal mRotationSpeed;  // determines how fast the body of vehicle could be rotated
-//    std::vector<MoveDir> mMoveDirectionBuffer; // vector pf rotation which enables multi key pressings
+//    QVector<MoveDir> mMoveDirectionBuffer; // vector pf rotation which enables multi key pressings
 //    QPointF mTrackMousePoint;  // the last position of mouse cursor
 
 private:
 //    void keyPressEvent(QKeyEvent * event) override;
 //    void keyReleaseEvent(QKeyEvent * event) override;
-    void applyRotation(MoveDir dir);
-    void applyKeyPress(MoveDir dir, qreal dx, qreal dy);
+//    void applyRotation(MoveDir dir);
+//    void applyKeyPress(MoveDir dir, qreal dx, qreal dy);
 };
 
 #endif // TANK_H

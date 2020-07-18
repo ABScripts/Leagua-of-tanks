@@ -42,7 +42,8 @@ HEADERS += \
     bullet.h \
     gameview.h \
     graphicscenemodel.h \
-    maingamewindow.h
+    maingamewindow.h \
+    movedirenum.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

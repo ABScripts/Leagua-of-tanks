@@ -20,6 +20,7 @@ private:
 signals:
     void mousePressEventOccured(QMouseEvent * event);
     void mouseMoveEventOccured(QMouseEvent * event);
+    //void onUpKeyPressed(QKey * key);
 };
 
 

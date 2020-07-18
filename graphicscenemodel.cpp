@@ -1,6 +1,7 @@
 #include "graphicscenemodel.h"
 #include <QGraphicsRectItem>
 
+#include "Tanks/TankViews/tankview.h"
 #include "Tanks/tank.h"
 #include "Tanks/enemytank.h"
 #include "Tanks/teammatetank.h"
@@ -13,12 +14,12 @@ GameSceneViewModel::GameSceneViewModel(int x, int y, int width, int height, QObj
 
 void GameSceneViewModel::setupScene()
 {
-    addItem(new Tank(0, 0));
+    addItem(new TankView(0, 0));
     QGraphicsRectItem * rectTest = new QGraphicsRectItem(100,100,100, 100);
     QGraphicsScene::addItem(rectTest);    // do some work related with setting a background or erading data from the model
 }
 
-void GameSceneViewModel::addItem(Tank *tank)
+void GameSceneViewModel::addItem(TankView *tank)
 {
     selfTanks.insert(tank);
     // should connect some signals and slots

@@ -5,9 +5,7 @@
 #include <QGraphicsScene>
 #include <QSet>
 
-class Tank;
-class EnemyTank;
-class TeammateTank;
+class TankView;
 
 // view`s view model
 class GameSceneViewModel: public QGraphicsScene
@@ -18,12 +16,10 @@ public:
 
     void setupScene();
 
-    void addItem(Tank * tank);
+    void addItem(TankView * tank);
 
 private:
-    QSet<EnemyTank *> enemyTanks;
-    QSet<TeammateTank *> teammateTanks;
-    QSet<Tank *> selfTanks; //actually the tanks you play with. Maybe the multi tanks` control system would be implemented,
+    QSet<TankView *> selfTanks; //actually the tanks you play with. Maybe the multi tanks` control system would be implemented,
                             // or the system, when you could switch bettween the tanks in real time
 };
 
