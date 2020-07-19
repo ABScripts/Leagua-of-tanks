@@ -3,9 +3,11 @@
 
 #include <QMainWindow>
 
+QT_BEGIN_NAMESPACE
 class QScreen;
 class GameView;
 class GameSceneViewModel;
+QT_END_NAMESPACE
 
 class MainGameWindow: public QMainWindow
 {

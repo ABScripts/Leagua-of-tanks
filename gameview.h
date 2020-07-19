@@ -3,7 +3,9 @@
 
 #include <QGraphicsView>
 
+QT_BEGIN_NAMESPACE
 class GameSceneViewModel;
+QT_END_NAMESPACE
 
 // actually the view
 class GameView: public QGraphicsView

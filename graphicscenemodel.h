@@ -4,7 +4,10 @@
 #include <QGraphicsScene>
 #include <QVector>
 #include <QEvent>
+
+QT_BEGIN_NAMESPACE
 class TankView;
+QT_END_NAMESPACE
 
 // view`s view model
 class GameSceneViewModel: public QGraphicsScene

@@ -4,9 +4,11 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 
+QT_BEGIN_NAMESPACE
 class TankView;
 class QMouseEvent;
 class TankTowerViewModel;
+QT_END_NAMESPACE
 
 class TankTowerView : public QObject, public QGraphicsPixmapItem
 {

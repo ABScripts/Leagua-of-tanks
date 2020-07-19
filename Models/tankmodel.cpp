@@ -1,7 +1,5 @@
 #include "tankmodel.h"
 
-#include <QTimer>
-
 TankModel::TankModel()
     : mMoveSpeed(MoveSpeed::MoveSpeed),
       mRotationSpeed(MoveSpeed::RotationSpeed),

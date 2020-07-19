@@ -6,14 +6,15 @@
 #include <QVector>
 #include "movedirenum.h"
 
+QT_BEGIN_NAMESPACE
 class QTimer;
 class TankModel;
 class QKeyEvent;
 class QGraphicsItem;
+QT_END_NAMESPACE
 
 class TankViewModel: public QObject {
     Q_OBJECT
-
 public:
     TankViewModel();
     ~TankViewModel();

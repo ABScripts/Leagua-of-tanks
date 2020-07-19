@@ -4,7 +4,9 @@
 #include <QGraphicsRectItem>
 #include <QObject>
 
+QT_BEGIN_NAMESPACE
 class QTimer;
+QT_END_NAMESPACE
 
 class Bullet: public QObject, public QGraphicsRectItem
 {

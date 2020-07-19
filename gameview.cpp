@@ -1,7 +1,7 @@
 #include "gameview.h"
 
 #include <QEvent>
-#include <QInputEvent>
+#include <QInputEvent> // should be here to make possible translation from QMouseEvent to QEvent, while it s out of event method
 #include "graphicscenemodel.h"
 
 GameView::GameView(GameSceneViewModel *scene, QWidget * parent)

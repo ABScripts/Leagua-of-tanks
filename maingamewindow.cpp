@@ -2,7 +2,6 @@
 
 #include <QScreen>
 #include <QGuiApplication>
-#include <QDesktopWidget>
 #include "gameview.h"
 #include "graphicscenemodel.h"
 

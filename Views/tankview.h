@@ -3,10 +3,12 @@
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
-#include "tanktowerview.h"
+#include "Views/tanktowerview.h"
 #include "movedirenum.h"
 
+QT_BEGIN_NAMESPACE
 class TankViewModel;
+QT_END_NAMESPACE
 
 class TankView : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
@@ -16,7 +18,6 @@ public:
 private:
     TankViewModel * mTankViewModel_ptr;
     TankTowerView * mTankTowerView_ptr;
-
 private:
     void setupTankView(int x, int y);
 signals:

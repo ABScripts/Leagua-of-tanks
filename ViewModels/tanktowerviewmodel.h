@@ -3,7 +3,9 @@
 
 #include <QObject>
 
+QT_BEGIN_NAMESPACE
 class TankTowerModel;
+QT_END_NAMESPACE
 
 class TankTowerViewModel : public QObject
 {

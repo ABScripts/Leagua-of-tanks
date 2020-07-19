@@ -18,19 +18,6 @@ Bullet::Bullet(qreal x, qreal y, qreal angle) // qreal is just a typedef of qrea
 void Bullet::move()
 {
     QList<QGraphicsItem *> collideItems = this->collidingItems();
-
-    // checking for collidings
-//    for (int i = 0; i < collideItems.size(); ++i) {
-//        if (typeid (*collideItems[i]) == typeid(Tank)) {
-//            if ( dynamic_cast<Tank*>(collideItems[i])->getTankType() == Tank::TankType::Enemy) {
-//                scene()->removeItem(collideItems[i]);
-//                scene()->removeItem(this);
-//                delete this;
-//                return;
-//            }
-//        }
-//    }
-
     qreal angle = rotation();
     qreal dx = static_cast<int>(Bullet::Speed::MoveSpeed) * qSin(qDegreesToRadians(angle));
     qreal dy = static_cast<int>(Bullet::Speed::MoveSpeed) * qCos(qDegreesToRadians(angle));
@@ -38,7 +25,6 @@ void Bullet::move()
     this->setPos(x() + dx, y() - dy);
 
     if ( pos().y() + this->rect().height() < 0) {
-        //this->scene()->removeItem(this);
-        delete this;
+        delete this; // gavnokod vsudy:)
     }
 }
