@@ -1,7 +1,7 @@
 #include "tanktowerviewmodel.h"
 
 #include <QFileInfo>
-#include "tanktowermodel.h"
+#include "Models/tanktowermodel.h"
 
 TankTowerViewModel::TankTowerViewModel()
    : mTankTowerModel_ptr(new TankTowerModel())
