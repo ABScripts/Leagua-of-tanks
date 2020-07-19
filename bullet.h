@@ -10,13 +10,14 @@ class Bullet: public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 public:
-    enum class Size {
-        Width = 5,
-        Height = 20
-    };
 
     enum class Speed {
         MoveSpeed = 6
+    };
+
+    enum class Size {
+        Width = 5,
+        Height = 20
     };
 
     Bullet(qreal x, qreal y, qreal mAnglel);
