@@ -1,9 +1,12 @@
 #ifndef TANK_VIEW_MODEL
 #define TANK_VIEW_MODEL
 
+#include <QPointF>
 #include <QObject>
+#include <QVector>
 #include "movedirenum.h"
 
+class QTimer;
 class TankModel;
 class QKeyEvent;
 class QGraphicsItem;
@@ -15,19 +18,19 @@ public:
     TankViewModel();
     ~TankViewModel();
 signals:
-    void newDirectionWasSetted(MoveDir direction);
-    void DirectionWasUnsetted(MoveDir direction);
     void imagePathFetched(QString path);
-    void directionChanged(int moveSpeed, int rotationSpeed, QVector<MoveDir> dirs);
+    void directionChanged(int moveSpeed, int rotationSpeed, QVector<Movement::MoveDir> dirs);
 public slots:
     virtual void keyPressEventOccuredSlot(QKeyEvent * event);
     virtual void keyReleaseEventOccuredSlot(QKeyEvent * event);
     void requestForImagePathSlot();
-    void directionChangedSlot(int moveSpeed, int rotationSpeed);
+    void emitTimerSignal();
 private:
     TankModel * mTankModel_ptr;
-
-    void distinguishDirection(int key, MoveDir & resDir);
+    QTimer * mMotionTimer_ptr;
+    QVector<Movement::MoveDir> MoveDirectionBuffer; // vector pf rotation which enables multi key pressings
+    Movement::MoveDir distinguishDirection(int key);
+    QPointF mTrackMousePoint;  // the last position of the mouse cursor
 };
 
 #endif

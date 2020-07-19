@@ -17,33 +17,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     MathCore/mathcore.cpp \
-    Tanks/TankModels/tankmodel.cpp \
-    Tanks/TankTowers/tanktower.cpp \
-    Tanks/TankViewModels/tankviewmodel.cpp \
-    Tanks/TankViews/tankview.cpp \
-    Tanks/enemytank.cpp \
-    Tanks/tank.cpp \
-    Tanks/teammatetank.cpp \
+    Models/tankmodel.cpp \
+    ViewModels/tankviewmodel.cpp \
+    Views/tankview.cpp \
     bullet.cpp \
     gameview.cpp \
     graphicscenemodel.cpp \
     main.cpp \
-    maingamewindow.cpp
+    maingamewindow.cpp \
+    Models/tanktowermodel.cpp \
+    Views/tanktowerview.cpp \
+    ViewModels/tanktowerviewmodel.cpp
 
 HEADERS += \
     MathCore/mathcore.h \
-    Tanks/TankModels/tankmodel.h \
-    Tanks/TankTowers/tanktower.h \
-    Tanks/TankViewModels/tankviewmodel.h \
-    Tanks/TankViews/tankview.h \
-    Tanks/enemytank.h \
-    Tanks/tank.h \
-    Tanks/teammatetank.h \
+    Models/tankmodel.h \
+    ViewModels/tankviewmodel.h \
+    Views/tankview.h \
     bullet.h \
     gameview.h \
     graphicscenemodel.h \
     maingamewindow.h \
-    movedirenum.h
+    movedirenum.h \
+    Models/tanktowermodel.h \
+    Views/tanktowerview.h \
+    ViewModels/tanktowerviewmodel.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

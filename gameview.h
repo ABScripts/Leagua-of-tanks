@@ -11,16 +11,18 @@ class GameView: public QGraphicsView
     Q_OBJECT
 public:
     GameView() = default;
-    GameView(GameSceneViewModel * scene, QWidget * parent);
-
-    void mousePressEvent(QMouseEvent *event) override;
+    explicit GameView(GameSceneViewModel * scene, QWidget * parent);
+protected:
+    bool event(QEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
 private:
-    GameSceneViewModel * mviewModel_ptr;
+   GameSceneViewModel * mViewModel_ptr;
+private:
+    void setupView(GameSceneViewModel *scene);
 signals:
     void mousePressEventOccured(QMouseEvent * event);
     void mouseMoveEventOccured(QMouseEvent * event);
-    //void onUpKeyPressed(QKey * key);
+    void eventHandled(QEvent * event);
 };
 
 

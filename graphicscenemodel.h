@@ -1,10 +1,9 @@
 #ifndef GRAPHICSCENEMODEL_H
-
 #define GRAPHICSCENEMODEL_H
 
 #include <QGraphicsScene>
-#include <QSet>
-
+#include <QVector>
+#include <QEvent>
 class TankView;
 
 // view`s view model
@@ -18,8 +17,16 @@ public:
 
     void addItem(TankView * tank);
 
+signals:
+    void mouseMoveEventOccured(QEvent *event);
+    void mousePressEventOccured(QEvent *event);
+    void keyPressEventOccured(QEvent *event);
+    void keyReleaseEventOccured(QEvent *event);
+public slots:
+    void eventHandledSlot(QEvent *event);
+
 private:
-    QSet<TankView *> selfTanks; //actually the tanks you play with. Maybe the multi tanks` control system would be implemented,
+    QVector<TankView *> selfTanks; //actually the tanks you play with. Maybe the multi tanks` control system would be implemented,
                             // or the system, when you could switch bettween the tanks in real time
 };
 

@@ -1,61 +1,37 @@
 #include "gameview.h"
 
+#include <QEvent>
+#include <QInputEvent>
 #include "graphicscenemodel.h"
 
-class QMouseEvent;
-
 GameView::GameView(GameSceneViewModel *scene, QWidget * parent)
-    : QGraphicsView(scene, parent), mviewModel_ptr(scene) {
-    setFixedSize(scene->width(), scene->height());
-
-    setMouseTracking(true);
-
-//    tank = new Tank(scene->width() / 2 - Tank::Size::Width / 2,
-//                            scene->height() / 2 - Tank::Size::Height / 2);
-//    tank->setFlag(QGraphicsItem::ItemIsFocusable);
-//    tank->setFocus();
-
-//   StandartTank * enemyTank = new StandartTank(100, 100, StandartTank::TankType::Enemy);
-//    this->scene()->addItem(enemyTank);
-//    this->scene()->addItem(tank);
-}
-
-void GameView::mousePressEvent(QMouseEvent *event)
+    : QGraphicsView(scene, parent),
+      mViewModel_ptr(scene)
 {
-//    // getting the tank`s tower
-//    TankTower * tower = tank->getTower();
+    setupView(scene);
 
-//    // determines the top left point in which the bullet should spawn
-//    QPoint spawnPoint = MathCore::pointOnCircle(tank,
-//                                                fabs(tank->rect().center().y() - tower->y()) + static_cast<int>(Bullet::Size::Height),
-//                                                tower->rotation()-90 + tank->rotation());
-
-//    Bullet * bull = new Bullet(0, 0, tower->rotation() + tank->rotation());
-//    bull->setPos(spawnPoint.x(), spawnPoint.y());
-//    this->scene()->addItem(bull);
-    emit mousePressEventOccured(event);
+    connect(this, SIGNAL(eventHandled(QEvent*)), mViewModel_ptr, SLOT(eventHandledSlot(QEvent*)));
 }
 
 void GameView::mouseMoveEvent(QMouseEvent *event)
 {
-//    TankTower * tower = tank->getTower();
+    emit eventHandled(event); // think of it and consider move it somehow to the event() method
+}
 
-//    // point where the projectile explode
-//    QPointF bulletStartPosition = {tank->x() + tank->rect().width() / 2, tank->y() + tank->rect().height()};
-//    // actually the point where the mouse currently is
-//    QPointF mousePosition = event->pos();
+bool GameView::event(QEvent *event)
+{
+    if (event->type() == QEvent::MouseButtonPress || // make this work better, consider change to signal signal model
+            event->type() == QEvent::KeyPress ||
+            event->type() == QEvent::KeyRelease )
+    {
+        emit eventHandled(event);
+        return true;
+    }
+    return QGraphicsView::event(event);
+}
 
-//    qreal angle = atan2(mousePosition.y() - bulletStartPosition.y() + static_cast<int>(Bullet::Size::Width) / 2,
-//                         mousePosition.x() - bulletStartPosition.x() + static_cast<int>(Bullet::Size::Width) / 2);
-
-//    // remembers the last position of mouse when it was moved (products a slight movements)
-//    tank->setTrackMousePoint(QPoint(event->x(), event->y()));
-
-//    tower->setRotation(qRadiansToDegrees(angle) + 90 - tank->rotation());
-//    // + 90 becouse this func means:
-//    //      90
-//    //   180 + 0
-//    //      270
-//    // At the same time in our coordinate system 90 is replaced with 0 and all left numbers go all the way down.
-    emit mouseMoveEventOccured(event);
+void GameView::setupView(GameSceneViewModel *scene)
+{
+    setMouseTracking(true);
+    setFixedSize(scene->width(), scene->height());
 }

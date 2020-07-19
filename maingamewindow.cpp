@@ -29,11 +29,13 @@ MainGameWindow::MainGameWindow(QWidget *parent)
 
 void MainGameWindow::setupWindow()
 {
-    setWindowsSize();
-    connect(currentScreen, &QScreen::geometryChanged, this, &MainGameWindow::setWindowsSize);
+    setFixedSize( static_cast<int>(Resolution::Width),
+                  static_cast<int>(Resolution::Height));
+    // setWindowsSize();
+   // connect(currentScreen, &QScreen::geometryChanged, this, &MainGameWindow::setWindowsSize);
 }
 
-void MainGameWindow::setWindowsSize()
+void MainGameWindow::setWindowsSize() // deprecated for a while
 {
     QList<QScreen *> systemScreens = QGuiApplication::screens();
     currentScreen = systemScreens[0];

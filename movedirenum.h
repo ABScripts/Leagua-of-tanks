@@ -1,6 +1,7 @@
-#ifndef MOVEDIRENUM_H
-#define MOVEDIRENUM_H
+#ifndef MOVE_DIR_ENUM_H
+#define MOVE_DIR_ENUM_H
 
+namespace Movement{
 enum class MoveDir {
     Left = 0,
     Right,
@@ -8,5 +9,6 @@ enum class MoveDir {
     Down,
     None
 };
+}
 
-#endif // MOVEDIRENUM_H
+#endif

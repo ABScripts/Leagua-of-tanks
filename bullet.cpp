@@ -2,7 +2,6 @@
 
 #include <QTimer>
 #include <qmath.h>
-#include "Tanks/tank.h"
 
 Bullet::Bullet(qreal x, qreal y, qreal angle) // qreal is just a typedef of qreal
     : QGraphicsRectItem(0, 0, static_cast<int>(Bullet::Size::Width),

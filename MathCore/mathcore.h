@@ -1,11 +1,12 @@
 #ifndef MATH_CORE
 #define MATH_CORE
 
-#include "Tanks/tank.h"
+#include <QPoint>
+class TankView;
 
 class MathCore {
 public:
-    static QPoint pointOnCircle(const Tank * tank, qreal circleRadius, qreal angle);
+    static QPoint pointOnCircle(const TankView * tank, qreal circleRadius, qreal angle);
 };
 
 #endif
