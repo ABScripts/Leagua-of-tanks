@@ -31,7 +31,7 @@ void TankView::setupTankView(int x, int y)
 
     emit requestForImagePath(); // fetching image for our tank
 
-    this->setScale(qreal(100 + 100) / (pixmap().size().width() + pixmap().size().height())); // scaling image according to the tank`s size
+    this->setScale(qreal(100 + 100) / (pixmap().size().width() + pixmap().size().height())); // scaling image according to the tank`s size ??
 
     setTransformOriginPoint(pixmap().size().width() / 2, pixmap().size().height() / 2);
 
