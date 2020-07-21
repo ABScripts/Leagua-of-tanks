@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/tankimages">
+        <file>resources/tanktower.png</file>
+        <file>resources/tankbody.png</file>
+    </qresource>
+</RCC>
