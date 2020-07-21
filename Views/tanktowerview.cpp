@@ -13,7 +13,7 @@ TankTowerView::TankTowerView(QGraphicsItem *parent)
       mTowerViewModel_ptr(new TankTowerViewModel())
 {
     connect(this, &TankTowerView::requestForImagePath, mTowerViewModel_ptr, &TankTowerViewModel::requestForImagePathSlot);
-    connect(mTowerViewModel_ptr, SIGNAL(imagePathFetched(QString)), this, SLOT(acceptImagePath(QString)));
+    connect(mTowerViewModel_ptr, &TankTowerViewModel::imagePathFetched, this, &TankTowerView::acceptImagePath);
     setupTankTower(pixmap().width() / 2 + 70, -40); // change it to no hard code values
 }
 
@@ -22,7 +22,7 @@ TankTowerView::~TankTowerView()
     delete mTowerViewModel_ptr;
 }
 
-void TankTowerView::acceptImagePath(QString path)
+void TankTowerView::acceptImagePath(const QString & path)
 {
     if (path == "") {
         // if this image is missing from the folder just brush it with some default colors

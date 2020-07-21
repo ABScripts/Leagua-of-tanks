@@ -13,12 +13,14 @@ public:
         Height = 140
     };
 
-    TankTowerModel();
+    TankTowerModel(QObject * parent = nullptr);
     qreal rotationSpeed() const;
     QString towerImagePath() const;
+    void setTowerImagePath(const QString &towerImagePath);
+
 private:
     qreal mRotationSpeed;
-    const QString mTowerImagePath {":/tankimages/resources/tanktower.png"};
+    QString mTowerImagePath {":/tankimages/resources/tanktower.png"};
 };
 
 #endif // TANKTOWERMODEL_H

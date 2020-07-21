@@ -23,8 +23,4 @@ void Bullet::move()
     qreal dy = static_cast<int>(Bullet::Speed::MoveSpeed) * qCos(qDegreesToRadians(angle));
 
     this->setPos(x() + dx, y() - dy);
-
-    if ( pos().y() + this->rect().height() < 0) {
-        delete this; // gavnokod vsudy:)
-    }
 }

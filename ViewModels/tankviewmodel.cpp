@@ -19,13 +19,13 @@ TankViewModel::~TankViewModel()
 
 void TankViewModel::keyPressEventOccuredSlot(QKeyEvent * event)
 {
-    Movement::MoveDir dir = distinguishDirection(event->key()); // get enum-value specified direction
+    MoveDir dir = distinguishDirection(event->key()); // get enum-value specified direction
 
     int moveSpeed = mTankModel_ptr->getMoveSpeed();
     int rotationSpeed = mTankModel_ptr->getRotationSpeed();
 
-    if (dir != Movement::MoveDir::None) { // if it is actually a key
-        for (QVector<Movement::MoveDir>::Iterator it = MoveDirectionBuffer.begin(); it != MoveDirectionBuffer.end(); ++it) {
+    if (dir != MoveDir::None) { // if it is actually a key
+        for (QVector<MoveDir>::Iterator it = MoveDirectionBuffer.begin(); it != MoveDirectionBuffer.end(); ++it) {
             if (*it == dir) {
                 return;
             }
@@ -49,10 +49,10 @@ void TankViewModel::keyReleaseEventOccuredSlot(QKeyEvent * event)
     int moveSpeed = mTankModel_ptr->getMoveSpeed();
     int rotationSpeed = mTankModel_ptr->getRotationSpeed();
 
-    Movement::MoveDir dir = distinguishDirection(event->key());
+    MoveDir dir = distinguishDirection(event->key());
 
-    if (dir != Movement::MoveDir::None) {
-        for (QVector<Movement::MoveDir>::Iterator it = MoveDirectionBuffer.begin(); it != MoveDirectionBuffer.end(); ++it) {
+    if (dir != MoveDir::None) {
+        for (QVector<MoveDir>::Iterator it = MoveDirectionBuffer.begin(); it != MoveDirectionBuffer.end(); ++it) {
             if (*it == dir) {
                 it = MoveDirectionBuffer.erase(it);
                 break;
@@ -87,24 +87,24 @@ void TankViewModel::emitTimerSignal()
     emit directionChanged(moveSpeed, rotationSpeed, MoveDirectionBuffer);
 }
 
-Movement::MoveDir TankViewModel::distinguishDirection(int key)
+MoveDir TankViewModel::distinguishDirection(int key)
 {
-    Movement::MoveDir dir;
+    MoveDir dir;
     switch(key) {
     case Qt::Key_Left:
-        dir = Movement::MoveDir::Left;
+        dir = MoveDir::Left;
         break;
     case Qt::Key_Right:
-        dir = Movement::MoveDir::Right;
+        dir = MoveDir::Right;
         break;
     case Qt::Key_Up:
-        dir = Movement::MoveDir::Up;
+        dir = MoveDir::Up;
         break;
     case Qt::Key_Down:
-        dir = Movement::MoveDir::Down;
+        dir = MoveDir::Down;
         break;
     default:
-        dir = Movement::MoveDir::None; // if it is not the key we track than do nothing
+        dir = MoveDir::None; // if it is not the key we track than do nothing
     }
 
     return dir;

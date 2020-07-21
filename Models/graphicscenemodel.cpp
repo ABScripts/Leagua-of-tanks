@@ -19,10 +19,10 @@ void GameSceneViewModel::setupScene()
 
 void GameSceneViewModel::addItem(TankView *tank)
 {
-    connect(this, SIGNAL(mouseMoveEventOccured(QEvent*)), tank, SLOT(mouseMoveEventSlot(QEvent*)));
-    connect(this, SIGNAL(mousePressEventOccured(QEvent*)), tank, SLOT(mouseButtonPressEventSlot(QEvent*)));
-    connect(this, SIGNAL(keyPressEventOccured(QEvent*)), tank, SLOT(keyPressEventSlot(QEvent*))); // should try to simplify to signal to signal
-    connect(this, SIGNAL(keyReleaseEventOccured(QEvent*)), tank, SLOT(keyReleaseEventSlot(QEvent*)));
+    connect(this, &GameSceneViewModel::mouseMoveEventOccured, tank, &TankView::mouseMoveEventSlot);
+    connect(this, &GameSceneViewModel::mousePressEventOccured, tank, &TankView::mouseButtonPressEventSlot);
+    connect(this, &GameSceneViewModel::keyPressEventOccured, tank, &TankView::keyPressEventSlot); // should try to simplify to signal to signal
+    connect(this, &GameSceneViewModel::keyReleaseEventOccured, tank, &TankView::keyReleaseEventSlot);
     selfTanks.push_back(tank);
     // should connect some tank`s signals and slots
     QGraphicsScene::addItem(tank);

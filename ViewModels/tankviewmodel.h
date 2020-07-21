@@ -19,8 +19,8 @@ public:
     TankViewModel();
     ~TankViewModel();
 signals:
-    void imagePathFetched(QString path);
-    void directionChanged(int moveSpeed, int rotationSpeed, QVector<Movement::MoveDir> dirs);
+    void imagePathFetched(const QString & path);
+    void directionChanged(int moveSpeed, int rotationSpeed, QVector<MoveDir> dirs);
 public slots:
     virtual void keyPressEventOccuredSlot(QKeyEvent * event);
     virtual void keyReleaseEventOccuredSlot(QKeyEvent * event);
@@ -29,8 +29,8 @@ public slots:
 private:
     TankModel * mTankModel_ptr;
     QTimer * mMotionTimer_ptr;
-    QVector<Movement::MoveDir> MoveDirectionBuffer; // vector pf rotation which enables multi key pressings
-    Movement::MoveDir distinguishDirection(int key);
+    QVector<MoveDir> MoveDirectionBuffer; // vector pf rotation which enables multi key pressings
+    MoveDir distinguishDirection(int key);
     QPointF mTrackMousePoint;  // the last position of the mouse cursor
 };
 

@@ -4,12 +4,8 @@
 #include <QGuiApplication>
 #include "gameview.h"
 #include "graphicscenemodel.h"
+namespace {
 
-namespace { // temporary settings for screen resolution
-    enum class Resolution {
-        Width = 1600,
-        Height = 800
-    };
 }
 
 MainGameWindow::MainGameWindow(QWidget *parent)
@@ -17,21 +13,16 @@ MainGameWindow::MainGameWindow(QWidget *parent)
 {
     setupWindow();
 
-    mScene_ptr = new GameSceneViewModel(0,
-                                   0,
-                                   static_cast<int>(Resolution::Width),
-                                   static_cast<int>(Resolution::Height),
-                                   this);
+    mScene_ptr = new GameSceneViewModel(0, 0, width, height, this);
 
     mView_ptr = new GameView(mScene_ptr, this);
 }
 
 void MainGameWindow::setupWindow()
 {
-    setFixedSize( static_cast<int>(Resolution::Width),
-                  static_cast<int>(Resolution::Height));
+    setFixedSize(width, height);
     // setWindowsSize();
-   // connect(currentScreen, &QScreen::geometryChanged, this, &MainGameWindow::setWindowsSize);
+    // connect(currentScreen, &QScreen::geometryChanged, this, &MainGameWindow::setWindowsSize);
 }
 
 void MainGameWindow::setWindowsSize() // deprecated for a while
@@ -39,10 +30,10 @@ void MainGameWindow::setWindowsSize() // deprecated for a while
     QList<QScreen *> systemScreens = QGuiApplication::screens();
     currentScreen = systemScreens[0];
     // searching for the "biggest monitor"
-    for (QList<QScreen *>::Iterator it = std::next(systemScreens.begin()); it != systemScreens.end(); ++it) {
-        if ((*it)->geometry().width() > currentScreen->geometry().width() &&
-                (*it)->geometry().height() > currentScreen->geometry().height()) {
-            currentScreen = *it;
+    for (auto screen: systemScreens) {
+        if (screen->geometry().width() > currentScreen->geometry().width() &&
+                screen->geometry().height() > currentScreen->geometry().height()) {
+            currentScreen = screen;
         }
     }
 

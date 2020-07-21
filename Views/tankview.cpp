@@ -11,12 +11,12 @@ TankView::TankView(qreal x, qreal y, QGraphicsItem *parent)
       mTankTowerView_ptr(new TankTowerView(this))
 {
     connect(this, &TankView::requestForImagePath, mTankViewModel_ptr, &TankViewModel::requestForImagePathSlot);
-    connect(mTankViewModel_ptr, SIGNAL(imagePathFetched(QString)), this, SLOT(acceptImagePath(QString)));     // used this syntax of signals and slots because this one is with parameters
-    connect(this, SIGNAL(keyPressEventOccured(QKeyEvent*)), mTankViewModel_ptr, SLOT(keyPressEventOccuredSlot(QKeyEvent*)));
-    connect(this, SIGNAL(keyReleaseEventOccured(QKeyEvent*)), mTankViewModel_ptr, SLOT(keyReleaseEventOccuredSlot(QKeyEvent*)));
-    connect(mTankViewModel_ptr, SIGNAL(directionChanged(int, int, QVector<Movement::MoveDir>)), this, SLOT(directionChangedSlot(int, int, QVector<Movement::MoveDir>)));
-    connect(this, SIGNAL(mouseMoveEventOccured(QMouseEvent *, TankView *)), mTankTowerView_ptr, SLOT(mouseMoveEventSlot(QMouseEvent *, TankView *)));
-    connect(this, SIGNAL(mouseButtonPressEventOccured(QMouseEvent *, TankView *)), mTankTowerView_ptr, SLOT(mousePressEventSlot(QMouseEvent *, TankView *)));
+    connect(mTankViewModel_ptr, &TankViewModel::imagePathFetched, this, &TankView::acceptImagePath);
+    connect(this, &TankView::keyPressEventOccured, mTankViewModel_ptr, &TankViewModel::keyPressEventOccuredSlot);
+    connect(this, &TankView::keyReleaseEventOccured, mTankViewModel_ptr, &TankViewModel::keyReleaseEventOccuredSlot);
+    connect(mTankViewModel_ptr, &TankViewModel::directionChanged, this, &TankView::directionChangedSlot);
+    connect(this, &TankView::mouseMoveEventOccured, mTankTowerView_ptr, &TankTowerView::mouseMoveEventSlot);
+    connect(this, &TankView::mouseButtonPressEventOccured, mTankTowerView_ptr, &TankTowerView::mousePressEventSlot);
     setupTankView(x, y);
 }
 
@@ -39,7 +39,7 @@ void TankView::setupTankView(int x, int y)
     setFocus();
 }
 
-void TankView::acceptImagePath(QString path)
+void TankView::acceptImagePath(const QString & path)
 {
     if (path == "") {
         // if this image is missing from the folder just brush it with some default colors
@@ -49,7 +49,7 @@ void TankView::acceptImagePath(QString path)
 }
 
 
-void TankView::directionChangedSlot(int moveSpeed, int rotationSpeed, QVector<Movement::MoveDir> direction)
+void TankView::directionChangedSlot(int moveSpeed, int rotationSpeed, QVector<MoveDir> direction)
 {
     qreal angle = rotation();
 
@@ -57,14 +57,14 @@ void TankView::directionChangedSlot(int moveSpeed, int rotationSpeed, QVector<Mo
     qreal dy = moveSpeed * qCos(qDegreesToRadians(angle));
 
     for (auto dir: direction) {
-        if (dir == Movement::MoveDir::Down) {
+        if (dir == MoveDir::Down) {
             setPos(x() - dx, y() + dy);
-        } else if (dir == Movement::MoveDir::Up) {
+        } else if (dir == MoveDir::Up) {
             setPos(x() + dx, y() - dy);
-        } else if (dir == Movement::MoveDir::Left) {
+        } else if (dir == MoveDir::Left) {
             setRotation(rotation() - rotationSpeed);
             //mTower_ptr->setRotation(this->mTower_ptr->rotation() + mRotationSpeed);  // prevents tower rotation while the tank`s body is rotating
-        } else if (dir == Movement::MoveDir::Right) {
+        } else if (dir == MoveDir::Right) {
             setRotation(rotation() + rotationSpeed);
             //mTower_ptr->setRotation(this->mTower_ptr->rotation() - mRotationSpeed);
         }

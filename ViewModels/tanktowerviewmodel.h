@@ -14,7 +14,7 @@ public:
     TankTowerViewModel();
     ~TankTowerViewModel();
 signals:
-    void imagePathFetched(QString path);
+    void imagePathFetched(const QString & path);
 public slots:
     void requestForImagePathSlot();
 private:

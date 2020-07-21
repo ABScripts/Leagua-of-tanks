@@ -12,7 +12,7 @@ class GameView: public QGraphicsView
 {
     Q_OBJECT
 public:
-    GameView() = default;
+    GameView(QWidget *parent = nullptr);
     explicit GameView(GameSceneViewModel * scene, QWidget * parent);
 protected:
     bool event(QEvent *event) override;
@@ -26,7 +26,5 @@ signals:
     void mouseMoveEventOccured(QMouseEvent * event);
     void eventHandled(QEvent * event);
 };
-
-
 
 #endif // GAMEVIEW_H

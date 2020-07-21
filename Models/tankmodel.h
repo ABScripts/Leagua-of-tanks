@@ -3,8 +3,6 @@
 
 #include <QObject>
 
-#include "ViewModels/tankviewmodel.h"
-
 class TankModel: public QObject {
     Q_OBJECT
 
@@ -19,10 +17,11 @@ class TankModel: public QObject {
     };
 
 public:
-    TankModel();
+    TankModel(QObject * parent = nullptr);
     QString bodyImagePath() const;
     qreal getMoveSpeed() const;
     qreal getRotationSpeed() const;
+    void setBodyImagePath(const QString &value);
 
 signals:
     void directionsChanged(int moveSpeed, int rotationSpeed);
@@ -30,7 +29,7 @@ public slots:
     void timerSlot();
 
 private:
-    const QString BodyImagePath { ":/tankimages/resources/tankbody.png" };
+    QString BodyImagePath { ":/tankimages/resources/tankbody.png" };
     qreal mMoveSpeed;
     qreal mRotationSpeed;      // determines how fast the body of vehicle could be rotated
     QString mBodyImagePath;

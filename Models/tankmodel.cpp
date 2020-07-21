@@ -1,7 +1,8 @@
 #include "tankmodel.h"
 
-TankModel::TankModel()
-    : mMoveSpeed(MoveSpeed::MoveSpeed),
+TankModel::TankModel(QObject *parent)
+    : QObject(parent),
+      mMoveSpeed(MoveSpeed::MoveSpeed),
       mRotationSpeed(MoveSpeed::RotationSpeed),
       mBodyImagePath(BodyImagePath)
 {
@@ -16,6 +17,11 @@ QString TankModel::bodyImagePath() const
 void TankModel::timerSlot()
 {
     emit directionsChanged(mMoveSpeed, mRotationSpeed);
+}
+
+void TankModel::setBodyImagePath(const QString &value)
+{
+    BodyImagePath = value;
 }
 
 qreal TankModel::getRotationSpeed() const

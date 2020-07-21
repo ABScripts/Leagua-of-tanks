@@ -19,7 +19,7 @@ public:
 signals:
     void requestForImagePath();
 public slots:
-    void acceptImagePath(QString path);
+    void acceptImagePath(const QString & path);
     void mouseMoveEventSlot(QMouseEvent *event, TankView * tank);
     void mousePressEventSlot(QMouseEvent *event, TankView * tank);
 private:

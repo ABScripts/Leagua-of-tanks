@@ -4,13 +4,18 @@
 #include <QInputEvent> // should be here to make possible translation from QMouseEvent to QEvent, while it s out of event method
 #include "graphicscenemodel.h"
 
+GameView::GameView(QWidget *parent)
+    : QGraphicsView(parent)
+{
+
+}
+
 GameView::GameView(GameSceneViewModel *scene, QWidget * parent)
     : QGraphicsView(scene, parent),
       mViewModel_ptr(scene)
 {
     setupView(scene);
-
-    connect(this, SIGNAL(eventHandled(QEvent*)), mViewModel_ptr, SLOT(eventHandledSlot(QEvent*)));
+    connect(this, &GameView::eventHandled, mViewModel_ptr, &GameSceneViewModel::eventHandledSlot);
 }
 
 void GameView::mouseMoveEvent(QMouseEvent *event)

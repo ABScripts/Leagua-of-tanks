@@ -18,6 +18,9 @@ private:
     GameSceneViewModel * mScene_ptr;
     QScreen * currentScreen;
 
+    static const int width = 1600;
+    static const int height = 800;
+
     void setupWindow();
     void setWindowsSize();
 };

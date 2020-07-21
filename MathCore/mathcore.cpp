@@ -7,12 +7,6 @@ QPoint MathCore::pointOnCircle(const TankView * tank, qreal circleRadius, qreal 
 {
     qreal radAngle = qDegreesToRadians(angle);
 
-    // parametric equation
-//    return QPoint( circleRadius * qCos(radAngle) + tank->x() + tank->pixmap().width() / 2  ,
-//                  circleRadius * qSin(radAngle) + tank->y() + tank->pixmap().height() / 2 );
-
-
-
-            return QPoint( circleRadius * qCos(radAngle) + tank->x() + tank->pixmap().width() * tank->scale() + tank->pixmap().width() * tank->scale() / 2 ,
-                             circleRadius * qSin(radAngle) + tank->y() +  tank->pixmap().height() * tank->scale() + tank->pixmap().height() * tank->scale() / 2);
+    return QPoint( circleRadius * qCos(radAngle) + tank->x() + tank->pixmap().width() * tank->scale() + tank->pixmap().width() * tank->scale() / 2 ,
+                   circleRadius * qSin(radAngle) + tank->y() +  tank->pixmap().height() * tank->scale() + tank->pixmap().height() * tank->scale() / 2);
 }

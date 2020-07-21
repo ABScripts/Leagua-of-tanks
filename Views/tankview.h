@@ -27,8 +27,8 @@ signals:
     void mouseButtonPressEventOccured(QMouseEvent *event, TankView * tank);// shitty, should be changed (pointer to tank)
     void requestForImagePath();
 public slots:
-    void acceptImagePath(QString path);
-    void directionChangedSlot(int moveSpeed, int rotationSpeed, QVector<Movement::MoveDir> dir);
+    void acceptImagePath(const QString &path);
+    void directionChangedSlot(int moveSpeed, int rotationSpeed, QVector<MoveDir> dir);
     void mouseMoveEventSlot(QEvent *event);
     void mouseButtonPressEventSlot(QEvent *event);
     void keyPressEventSlot(QEvent *event);
